@@ -8,6 +8,10 @@ namespace AssistWith.Models
 {
     public class Client : IClient
     {
+        public Client()
+        {
+
+        }
         [Key]
         public int ClientID { get; set; }
         public string Company { get; set; }

@@ -4,17 +4,35 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using AssistWith.Models; 
+using AssistWith.Models;
+using Microsoft.EntityFrameworkCore;
+
 namespace AssistWith.Pages.ClientPage 
 {
+    
     public class IndexModel : PageModel
     {
 
-        public AssistWith.Models.Client Client { get; set; }
+        [BindProperty]
+        public List<AssistWith.Models.Client> Clients { get; set; }
+        [BindProperty]
+        public AssistWith.Models.ClientViewModel ClientViewModel { get; set; }
         public void OnGet()
         {
-            Client = new AssistWith.Models.Client() { ClientID = 0 };
-        
+            Clients = new List<AssistWith.Models.Client>();
+            int cnt = 0;
+            foreach (var item in new string[] { "c1", "c2","c3", "c4" })
+            {
+                Clients.Add(new AssistWith.Models.Client() { ClientID = cnt++, Company = item });
+            } 
+        }
+        public async Task<IActionResult> OnPostAsync() { 
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+            var result = ClientViewModel.Client.Company;
+            return RedirectToPage("./Index");
         }
     }
 }

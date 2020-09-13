@@ -8,19 +8,27 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AssistWith.Data;
 using AssistWith.Models; 
-namespace AssistWith.Pages.ClientPage
+namespace AssistWith.Pages 
 {
-    public class ClientModel : PageModel
+    public class ClientPageModel : PageModel
     {
         private readonly AssistWith.Data.ApplicationDbContext _context;
 
-        public ClientModel(AssistWith.Data.ApplicationDbContext context)
+        public ClientPageModel(AssistWith.Data.ApplicationDbContext context)
         {
             _context = context;
-        }
-
-        [BindProperty]
+        } 
         public AssistWith.Models.Client Client { get; set; }
+        public AssistWith.Models.ClientViewModel ClientViewModel { get; set; }
+
+        public void OnGet()
+        {
+            ClientViewModel = new ClientViewModel()
+            {
+                Client = new AssistWith.Models.Client() { ClientID = 0 } 
+            };
+        }
+        
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
