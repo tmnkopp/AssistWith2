@@ -9,11 +9,13 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using AssistWith2.Data;
+using AssistWith.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using AssistWith.Models;
+using AssistWith.Common;
 
-namespace AssistWith2
+namespace AssistWith
 {
     public class Startup
     {
@@ -34,14 +36,24 @@ namespace AssistWith2
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+      
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
-
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddSingleton(typeof(IRepository<>), typeof(EfRepository<>));
+            services.AddSingleton<IConfiguration>(Configuration);
+            services.AddTransient<IClient, Client>();  
+            services.AddTransient<IProfile, Profile>();
+            services.AddTransient<IJobLead, JobLead>();
+            services.AddMvc()
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+                .AddRazorOptions(options =>
+                {
+                    options.PageViewLocationFormats.Add("/Pages/Shared/{0}.cshtml");
+                });  
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

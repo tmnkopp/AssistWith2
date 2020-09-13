@@ -1,0 +1,109 @@
+﻿@page
+@model AssistWith.Pages.ClientPage.ClientModel
+
+<h4>Client</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Client.ClientID" />
+            <div class="form-group">
+                <label asp-for="Client.Company" class="control-label"></label>
+                <input asp-for="Client.Company" class="form-control" />
+                <span asp-validation-for="Client.Company" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Client.ContactName" class="control-label"></label>
+                <input asp-for="Client.ContactName" class="form-control" />
+                <span asp-validation-for="Client.ContactName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Client.ContactAddress" class="control-label"></label>
+                <input asp-for="Client.ContactAddress" class="form-control" />
+                <span asp-validation-for="Client.ContactAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Client.Phone" class="control-label"></label>
+                <input asp-for="Client.Phone" class="form-control" />
+                <span asp-validation-for="Client.Phone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Client.Email" class="control-label"></label>
+                <input asp-for="Client.Email" class="form-control" />
+                <span asp-validation-for="Client.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Client.PasswordSalt" class="control-label"></label>
+                <input asp-for="Client.PasswordSalt" class="form-control" />
+                <span asp-validation-for="Client.PasswordSalt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Client.WebsiteUrl" class="control-label"></label>
+                <input asp-for="Client.WebsiteUrl" class="form-control" />
+                <span asp-validation-for="Client.WebsiteUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Client.SiteLogin" class="control-label"></label>
+                <input asp-for="Client.SiteLogin" class="form-control" />
+                <span asp-validation-for="Client.SiteLogin" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Client.SitePassword" class="control-label"></label>
+                <input asp-for="Client.SitePassword" class="form-control" />
+                <span asp-validation-for="Client.SitePassword" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Client.HostingUrl" class="control-label"></label>
+                <input asp-for="Client.HostingUrl" class="form-control" />
+                <span asp-validation-for="Client.HostingUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Client.HostingLogin" class="control-label"></label>
+                <input asp-for="Client.HostingLogin" class="form-control" />
+                <span asp-validation-for="Client.HostingLogin" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Client.HostingPass" class="control-label"></label>
+                <input asp-for="Client.HostingPass" class="form-control" />
+                <span asp-validation-for="Client.HostingPass" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Client.FTPLogin" class="control-label"></label>
+                <input asp-for="Client.FTPLogin" class="form-control" />
+                <span asp-validation-for="Client.FTPLogin" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Client.FTPPass" class="control-label"></label>
+                <input asp-for="Client.FTPPass" class="form-control" />
+                <span asp-validation-for="Client.FTPPass" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Client.DBLogin" class="control-label"></label>
+                <input asp-for="Client.DBLogin" class="form-control" />
+                <span asp-validation-for="Client.DBLogin" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Client.DBPass" class="control-label"></label>
+                <input asp-for="Client.DBPass" class="form-control" />
+                <span asp-validation-for="Client.DBPass" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Client.Notes" class="control-label"></label>
+                <input asp-for="Client.Notes" class="form-control" />
+                <span asp-validation-for="Client.Notes" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

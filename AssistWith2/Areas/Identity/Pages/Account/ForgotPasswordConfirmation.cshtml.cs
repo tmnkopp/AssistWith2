@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace AssistWith2.Pages
+namespace AssistWith2.Areas.Identity.Pages.Account
 {
-    public class ContactModel : PageModel
+    [AllowAnonymous]
+    public class ForgotPasswordConfirmation : PageModel
     {
-        public string Message { get; set; }
-
         public void OnGet()
         {
-            Message = "Your contact page.";
         }
     }
 }

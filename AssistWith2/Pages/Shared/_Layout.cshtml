@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - AssistWith2</title>
-
+    <title>@ViewData["Title"] - AssistWith</title>
+    <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro&display=swap" rel="stylesheet">
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
@@ -26,14 +26,13 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-page="/Index" class="navbar-brand">AssistWith2</a>
+                <a asp-page="/Index" class="navbar-brand">AssistWith</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a asp-page="/Index">Home</a></li>
-                    <li><a asp-page="/About">About</a></li>
-                    <li><a asp-page="/Contact">Contact</a></li>
-                </ul>
+                    <li><a asp-page="/Client/Index">Client</a></li> 
+                </ul> 
                 <partial name="_LoginPartial" />
             </div>
         </div>
@@ -45,7 +44,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; 2020 - AssistWith2</p>
+            <p>&copy; 2020 - AssistWith</p>
         </footer>
     </div>
 

@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace AssistWith2.Pages
+namespace AssistWith2.Areas.Identity.Pages.Account
 {
-    public class AboutModel : PageModel
+    [AllowAnonymous]
+    public class ResetPasswordConfirmationModel : PageModel
     {
-        public string Message { get; set; }
-
         public void OnGet()
         {
-            Message = "Your application description page.";
+
         }
     }
 }
