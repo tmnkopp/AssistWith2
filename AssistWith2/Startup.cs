@@ -40,8 +40,16 @@ namespace AssistWith
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>()
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+ 
+            services.AddIdentity<IdentityUser, IdentityRole>(opts => {
+                opts.Password.RequiredLength = 6;
+                opts.Password.RequireNonAlphanumeric = false;
+                opts.Password.RequireLowercase = false;
+                opts.Password.RequireUppercase = false;
+                opts.Password.RequireDigit = false;
+            }).AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
+
 
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
 
@@ -61,11 +69,17 @@ namespace AssistWith
                 .AddRazorOptions(options =>
                 {
                     options.PageViewLocationFormats.Add("/Pages/Shared/{0}.cshtml");
-                });  
+                });
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(
+            IApplicationBuilder app, 
+            IHostingEnvironment env,
+            UserManager<IdentityUser> userManager,
+            RoleManager<IdentityRole> roleManager,
+            ApplicationDbContext context)
         {
             if (env.IsDevelopment())
             {
@@ -83,7 +97,8 @@ namespace AssistWith
             app.UseCookiePolicy();
 
             app.UseAuthentication();
-
+            DbInitializer.Initialize(context);
+            DbInitializer.SeedData(userManager, roleManager);
             app.UseMvc();
         }
     }
