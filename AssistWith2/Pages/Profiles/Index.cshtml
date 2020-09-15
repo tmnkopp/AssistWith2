@@ -1,0 +1,18 @@
+﻿@page 
+@model AssistWith.Pages.Profiles.IndexModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+<h2>Index</h2>
+<table>
+    @foreach (var item in Model.Profiles)
+    {
+        <tr>
+            <td><a asp-page="/Clients/Edit" asp-route-id="@item.ProfileId">Edit</a></td>
+            <td>@item.PROCODE</td>
+            <td>@item.Username</td>
+            <td>@item.Password</td>
+        </tr> 
+    }
+</table>

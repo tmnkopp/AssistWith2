@@ -10,10 +10,14 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 16.5px;
 }
 
-.table, body, td, tr {
+.body-content table, body, td, tr {
     color: #d3d3d3;
 }
-
+.body-content table th, .body-content table td {
+    padding: 0.35rem;
+    vertical-align: top;
+    border-top: 1px solid #545454;
+}
 .body-content {
     padding-left: 15px;
     padding-right: 15px;

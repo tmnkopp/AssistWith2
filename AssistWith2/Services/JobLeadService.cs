@@ -15,8 +15,7 @@ namespace AssistWith.Services
         JobLead GetById(int id);
         void Insert(JobLead jobLead);
         void Update(JobLead jobLead);
-        string CompileTemplate(string Content, JobLead jobLead);
-
+        string CompileTemplate(string Content, JobLead jobLead); 
     }
     public class JobLeadService : IJobLeadService
     {

@@ -14,7 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using AssistWith.Models;
 using AssistWith.Common;
-
+using AssistWith.Services; 
 namespace AssistWith
 {
     public class Startup
@@ -36,18 +36,26 @@ namespace AssistWith
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-      
+            services.AddSingleton<IConfiguration>(Configuration);
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            services.AddSingleton(typeof(IRepository<>), typeof(EfRepository<>));
-            services.AddSingleton<IConfiguration>(Configuration);
+            services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
+
+            services.AddTransient<IService<Client>, ClientService>();
+            services.AddTransient<IService<Profile>, ProfileService>();
+
+            services.AddTransient<IJobLeadService, JobLeadService>(); 
+            services.AddTransient<IEncryptionService, EncryptionService>(); 
+
+            services.AddTransient<IDocProvider, DocProvider>();  
             services.AddTransient<IClient, Client>();  
             services.AddTransient<IProfile, Profile>();
             services.AddTransient<IJobLead, JobLead>();
+           
             services.AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
                 .AddRazorOptions(options =>

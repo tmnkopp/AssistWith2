@@ -7,6 +7,13 @@ using System.Web;
 
 namespace AssistWith.Services
 {
+    public interface IService<T>
+    {
+        void Delete(T obj);
+        IQueryable<T> GetAll(); 
+        void Insert(T obj);
+        void Update(T obj);
+    } 
     public interface IClientService
     {
         void Delete(Client client);
@@ -15,7 +22,7 @@ namespace AssistWith.Services
         void Insert(Client client);
         void Update(Client client);
     }
-    public class ClientService : IClientService
+    public class ClientService : IService<Client>
     {
         private readonly IRepository<Client> _clientRepository;
         private readonly IEncryptionService _encryptionService;
@@ -43,7 +50,8 @@ namespace AssistWith.Services
         {
             if (client == null)
                 throw new ArgumentNullException("Client");
-            client.PasswordSalt = _encryptionService.CreateSalt(24);
+            if (client.PasswordSalt == null)
+                client.PasswordSalt = _encryptionService.CreateSalt(24);
             _clientRepository.Insert(client);
         }
         public virtual void Update(Client client)

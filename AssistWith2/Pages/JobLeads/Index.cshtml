@@ -1,0 +1,18 @@
+﻿@page
+@model AssistWith.Pages.JobLeads.IndexModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+} 
+<h2>Index</h2>
+<table>
+    @foreach (var item in Model.JobLeads)
+    {
+        <tr>
+            <td><a asp-page="/JobLeads/Edit" asp-route-id="@item.JobLeadId">Edit</a></td>
+            <td>@item.CompanyName</td>
+            <td>@item.JobLeadCode</td>
+            <td>@item.JobTitle</td>
+        </tr> 
+    }
+</table>

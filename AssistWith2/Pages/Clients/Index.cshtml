@@ -1,0 +1,18 @@
+﻿@page 
+@model AssistWith.Pages.Clients.IndexModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+<h2>Index</h2>
+<table>
+    @foreach (var item in Model.Clients)
+    {
+        <tr>
+            <td><a asp-page="/Clients/Edit" asp-route-id="@item.ClientID">Edit</a></td>
+            <td>@item.Company</td>
+            <td>@item.SiteLogin</td>
+            <td>@item.SitePassword</td>
+        </tr> 
+    }
+</table>

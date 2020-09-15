@@ -14,7 +14,7 @@ namespace AssistWith.Services
         void Insert(Profile Profile);
         void Update(Profile Profile);
     }
-    public class ProfileService : IProfileService
+    public class ProfileService : IService<Profile>
     {
         private readonly IRepository<Profile> _repository;
         private readonly IEncryptionService _encryptionService;

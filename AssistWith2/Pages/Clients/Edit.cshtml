@@ -1,6 +1,10 @@
-﻿ 
-@model AssistWith.Models.ClientViewModel
- 
+﻿@page "{id:int}"
+@model AssistWith.Pages.Clients.EditModel
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
 <h4>Client</h4>
 <hr />
 <div class="row">
@@ -35,12 +39,7 @@
                 <label asp-for="Client.Email" class="control-label"></label>
                 <input asp-for="Client.Email" class="form-control" />
                 <span asp-validation-for="Client.Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Client.PasswordSalt" class="control-label"></label>
-                <input asp-for="Client.PasswordSalt" class="form-control" />
-                <span asp-validation-for="Client.PasswordSalt" class="text-danger"></span>
-            </div>
+            </div> 
             <div class="form-group">
                 <label asp-for="Client.WebsiteUrl" class="control-label"></label>
                 <input asp-for="Client.WebsiteUrl" class="form-control" />
@@ -93,18 +92,16 @@
             </div>
             <div class="form-group">
                 <label asp-for="Client.Notes" class="control-label"></label>
-                <input asp-for="Client.Notes" class="form-control" />
+                <textarea asp-for="Client.Notes" class="form-control"></textarea>
                 <span asp-validation-for="Client.Notes" class="text-danger"></span>
             </div>
 
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-page="./Index">Back to List</a>
-</div>
+</div> 
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+
+
