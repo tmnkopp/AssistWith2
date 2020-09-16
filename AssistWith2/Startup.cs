@@ -40,7 +40,7 @@ namespace AssistWith
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
- 
+         
             services.AddIdentity<IdentityUser, IdentityRole>(opts => {
                 opts.Password.RequiredLength = 6;
                 opts.Password.RequireNonAlphanumeric = false;
@@ -50,6 +50,12 @@ namespace AssistWith
             }).AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/Identity/Account/Login";
+                options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+                options.LogoutPath = "/Identity/Account/Logout";
+            });
 
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
 
@@ -67,12 +73,12 @@ namespace AssistWith
             services.AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
                 .AddRazorOptions(options =>
-                {
+                { 
                     options.PageViewLocationFormats.Add("/Pages/Shared/{0}.cshtml");
                 });
-            
-        }
 
+        }
+ 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(
             IApplicationBuilder app, 
@@ -91,12 +97,12 @@ namespace AssistWith
                 app.UseExceptionHandler("/Error");
                 app.UseHsts();
             }
-
+            
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseCookiePolicy();
-
+            app.UseCookiePolicy(); 
             app.UseAuthentication();
+            context.Database.Migrate();
             DbInitializer.Initialize(context);
             DbInitializer.SeedData(userManager, roleManager);
             app.UseMvc();

@@ -20,10 +20,12 @@ namespace AssistWith.Pages.Clients
         public IActionResult OnGet(int? id)
         {
             Client = new AssistWith.Models.Client() { ClientID = 0 };
-            if (id != null) 
+            if (id != null && id > 0)
+            {
                 Client = _clientService.GetAll()
-                        .Where(o => o.ClientID == id.GetValueOrDefault())
-                        .SingleOrDefault();  
+                  .Where(o => o.ClientID == id.GetValueOrDefault())
+                  .SingleOrDefault();
+            } 
             return Page();
         }
         public IActionResult OnPost()
