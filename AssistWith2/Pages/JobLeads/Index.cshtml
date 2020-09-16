@@ -5,6 +5,7 @@
     Layout = "~/Pages/Shared/_Layout.cshtml";
 } 
 <h2>Index</h2>
+<a asp-page="/JobLeads/Edit" asp-route-id="0">Add</a>
 <table>
     @foreach (var item in Model.JobLeads)
     {

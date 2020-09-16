@@ -8,6 +8,7 @@ namespace AssistWith.Models
 {
     public class Profile : IProfile
     {
+        [Key]
         public int ProfileId { get; set; }
         public string PROCODE { get; set; }
         public string ProfileUrl { get; set; }

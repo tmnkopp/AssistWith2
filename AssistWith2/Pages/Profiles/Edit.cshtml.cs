@@ -18,18 +18,21 @@ namespace AssistWith.Pages.Profiles
             _ProfileService = ProfileService;
         }
         public IActionResult OnGet(int? id)
-        {
+        {  
             Profile = new AssistWith.Models.Profile() { ProfileId = 0 };
-            if (id != null)
+            if (id != null && id > 0) {
                 Profile = _ProfileService.GetAll()
-                        .Where(o => o.ProfileId == id.GetValueOrDefault())
-                        .SingleOrDefault();
+                  .Where(o => o.ProfileId == id.GetValueOrDefault())
+                  .SingleOrDefault();
+            } 
             return Page();
         }
         public IActionResult OnPost()
         {
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid) {
+                var errors = ModelState.Values.SelectMany(v => v.Errors);
                 return Page();
+            }   
             if (Profile.ProfileId == 0)
                 _ProfileService.Insert(Profile);
             else

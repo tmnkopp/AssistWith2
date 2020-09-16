@@ -34,12 +34,13 @@ namespace AssistWith.Pages.JobLeads
         }  
         public IActionResult OnGet(int? id)
         {
-            JobLead = new JobLead() { JobLeadId = 0 }; 
-            if (id != null)
+            JobLead = new AssistWith.Models.JobLead() { JobLeadId = 0 };
+            if (id != null && id > 0)
+            {
                 JobLead = _jobLeadService.GetAll()
-                        .Where(o => o.JobLeadId == id.GetValueOrDefault())
-                        .SingleOrDefault();
- 
+                  .Where(o => o.JobLeadId == id.GetValueOrDefault())
+                  .SingleOrDefault();
+            }  
             Templates = new List<Template>();
             foreach (Template template in _docProvider.GetTemplateDocs()) { 
                 template.Content = _jobLeadService.CompileTemplate(template.Content, JobLead);

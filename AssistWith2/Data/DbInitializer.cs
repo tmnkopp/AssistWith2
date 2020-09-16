@@ -39,9 +39,12 @@ namespace AssistWith.Data
                 IdentityResult result = userManager.CreateAsync(user, "P@ssword1").Result;
                 if (result.Succeeded)
                 {
-                    userManager.AddToRoleAsync(user, "User").Wait();
+                    userManager.AddToRoleAsync(user, "Admin").Wait();
                 }
             }
+            var me = userManager.FindByNameAsync("timkopp@gmail.com").Result;
+            userManager.RemoveFromRoleAsync(me,"User").Wait();
+            userManager.AddToRoleAsync(me, "Admin").Wait();
         }
     }
 }

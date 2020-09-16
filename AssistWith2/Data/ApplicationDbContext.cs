@@ -16,6 +16,7 @@ namespace AssistWith.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
+
         }
         public new DbSet<TEntity> Set<TEntity>() where TEntity : class
         {

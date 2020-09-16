@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using AssistWith.Models;
 using Microsoft.EntityFrameworkCore;
 using AssistWith.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AssistWith.Pages.Profiles
-{ 
+{
+    [Authorize(Roles = "Admin")]
     public class IndexModel : PageModel
     { 
         [BindProperty]

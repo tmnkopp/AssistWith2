@@ -9,6 +9,7 @@ namespace AssistWith.Models
 {
     public class JobLead : IJobLead
     {
+        [Key]
         public int JobLeadId { get; set; }
         public string JobLeadCode { get; set; }
 
