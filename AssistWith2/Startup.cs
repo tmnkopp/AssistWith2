@@ -87,17 +87,20 @@ namespace AssistWith
             RoleManager<IdentityRole> roleManager,
             ApplicationDbContext context)
         {
+
+
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
+                app.UseDeveloperExceptionPage();
             }
             else
             {
                 app.UseExceptionHandler("/Error");
                 app.UseHsts();
             }
-            
+
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy(); 
