@@ -41,10 +41,7 @@ namespace AssistWith.Data
                 {
                     userManager.AddToRoleAsync(user, "Admin").Wait();
                 }
-            }
-            //var me = userManager.FindByNameAsync("timkopp@gmail.com").Result;
-            //userManager.RemoveFromRoleAsync(me,"User").Wait();
-            //userManager.AddToRoleAsync(me, "Admin").Wait();
+            } 
         }
     }
 }
