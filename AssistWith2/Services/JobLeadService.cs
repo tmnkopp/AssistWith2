@@ -52,7 +52,8 @@ namespace AssistWith.Services
             if (instance == null)
                 throw new ArgumentNullException(this.ToString()); 
             instance.PasswordSalt = _encryptionService.CreateSalt(24);
-            instance.Password = _encryptionService.Encrypt(instance.Password, instance.PasswordSalt);
+            if (instance.Password != null) 
+                instance.Password = _encryptionService.Encrypt(instance.Password, instance.PasswordSalt);
             _repository.Insert(instance);
         }
         public virtual void Update(JobLead instance)
@@ -60,7 +61,8 @@ namespace AssistWith.Services
             if (instance == null)
                 throw new ArgumentNullException(this.ToString()); 
             instance.PasswordSalt = DbUtil.GetSaltById(instance.JobLeadId);
-            instance.Password = _encryptionService.Encrypt(instance.Password, instance.PasswordSalt); 
+            if (instance.Password != null)
+                instance.Password = _encryptionService.Encrypt(instance.Password, instance.PasswordSalt);
             _repository.Update(instance);
         }
         public virtual void Delete(JobLead instance)
