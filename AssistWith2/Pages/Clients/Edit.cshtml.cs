@@ -35,8 +35,8 @@ namespace AssistWith.Pages.Clients
             if (Client.ClientID==0) 
                 _clientService.Insert(Client);
             else
-                _clientService.Update(Client); 
-            return Page();
+                _clientService.Update(Client);
+            return RedirectToPage("Edit", new { id = Client.ClientID });
         }
     }
 }

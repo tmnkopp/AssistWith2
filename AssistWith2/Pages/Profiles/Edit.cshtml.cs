@@ -45,8 +45,8 @@ namespace AssistWith.Pages.Profiles
             if (Profile.ProfileId == 0)
                 _ProfileService.Insert(Profile); 
             else
-                _ProfileService.Update(Profile);
-            return Page();
+                _ProfileService.Update(Profile); 
+            return RedirectToPage("Edit", new { id = Profile.ProfileId }); 
         }
     }
 }

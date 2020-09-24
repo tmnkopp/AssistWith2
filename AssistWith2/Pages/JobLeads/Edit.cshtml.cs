@@ -66,7 +66,7 @@ namespace AssistWith.Pages.JobLeads
                 _jobLeadService.Insert(JobLead);
             else
                 _jobLeadService.Update(JobLead);
-            return Page();
+            return RedirectToPage("Edit", new { id = JobLead.JobLeadId });
         }
     }
 }
