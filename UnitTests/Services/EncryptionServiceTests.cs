@@ -8,7 +8,14 @@ namespace AssistWith.Services.Tests
 {
     [TestClass()]
     public class EncryptionServiceTests
-    {
+    { 
+        [TestMethod()]
+        public void PasswordGen_Generates()
+        {
+            string pass = Utils.GeneratePassword(12); 
+            Assert.IsTrue(pass.Length > 12);
+        } 
+
         [TestMethod()]
         public void EncryptTest()
         {

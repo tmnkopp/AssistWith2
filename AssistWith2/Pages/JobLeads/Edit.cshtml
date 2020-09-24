@@ -6,15 +6,13 @@
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<h2>Edit</h2>
-
-<h4>JobLead</h4>
+<h2>Edit JobLead</h4>
 <hr />
 <div class="row">
     <div class="col-md-12">
         <form method="post">
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn-default" /><br />
             </div> 
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="JobLead.JobLeadId" />
@@ -87,6 +85,8 @@
                 <label asp-for="JobLead.Notes" class="control-label"></label>
                 <textarea asp-for="JobLead.Notes" class="form-control"></textarea>
                 <span asp-validation-for="JobLead.Notes" class="text-danger"></span>
+
+                <select asp-for="SelectedItems" asp-items="Model.selectList"></select>
             </div>
         </form>
     </div>

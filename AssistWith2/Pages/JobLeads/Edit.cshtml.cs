@@ -19,6 +19,10 @@ namespace AssistWith.Pages.JobLeads
         public JobLead JobLead { get; set; }
         [BindProperty]
         public List<Template> Templates { get; set; }
+        [BindProperty]
+        public string[] SelectedItems { get; set; }
+         
+        public SelectList selectList { get; set; }
 
         private readonly IJobLeadService _jobLeadService;
         private readonly IEncryptionService _encryptionService;
@@ -45,12 +49,17 @@ namespace AssistWith.Pages.JobLeads
             foreach (Template template in _docProvider.GetTemplateDocs()) { 
                 template.Content = _jobLeadService.CompileTemplate(template.Content, JobLead);
                 Templates.Add(template);
-            } 
+            }
+
+            selectList = 
+                new SelectList(Templates.ToList(), nameof(Template.Name), nameof(Template.Name));
+            SelectedItems = new string[] { "resume.html", "cover.html" }; 
             return Page();
         }
 
         public IActionResult OnPost()
         {
+            var items = SelectedItems.ToList();
             if (!ModelState.IsValid)
                 return Page();
             if (JobLead.JobLeadId == 0)
