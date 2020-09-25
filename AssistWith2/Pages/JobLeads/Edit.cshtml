@@ -4,16 +4,18 @@
 @{
     ViewData["Title"] = "Edit";
     Layout = "~/Pages/Shared/_Layout.cshtml";
-}
-
-<h2>Edit JobLead</h4>
-<hr />
+} 
 <div class="row">
     <div class="col-md-12">
         <form method="post">
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" /><br />
-            </div> 
+            <div class="row">
+                <div class="col-sm-2 form-group">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+                <div class="col-sm-6 form-group">
+                    <h2>JobLead Edit </h2>
+                </div>
+            </div>
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="JobLead.JobLeadId" />
             <div class="form-group">
@@ -98,7 +100,10 @@
     <h2> @item.Name</h2>
     if (Model.Templates.Count > 1)
     {
-        <a asp-page="/Doc/Edit" asp-route-id="1">Edit</a> 
+    
+        <a asp-page="/Docs/Index" 
+           asp-route-jobleadid="@Model.JobLead.JobLeadId" 
+           asp-route-TemplateName="@item.Name">View</a> 
     }
     if (item.EXT.Contains("html"))
     {

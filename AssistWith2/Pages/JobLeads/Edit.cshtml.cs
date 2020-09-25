@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using AssistWith.Data;
 using AssistWith.Models;
 using AssistWith.Services;
+using Microsoft.AspNetCore.Identity;
 
 namespace AssistWith.Pages.JobLeads
 {
@@ -27,10 +28,12 @@ namespace AssistWith.Pages.JobLeads
         private readonly IJobLeadService _jobLeadService;
         private readonly IEncryptionService _encryptionService;
         private readonly IDocProvider _docProvider;
+        private readonly UserManager<IdentityUser> _userManager;
         public EditModel(
             IJobLeadService JobLeadService,
             IEncryptionService EncryptionService,
-            IDocProvider DocProvider)
+            IDocProvider DocProvider,
+            UserManager<IdentityUser> userManager)
         {
             this._jobLeadService = JobLeadService;
             this._encryptionService = EncryptionService;
@@ -38,7 +41,12 @@ namespace AssistWith.Pages.JobLeads
         }  
         public IActionResult OnGet(int? id)
         {
-            JobLead = new AssistWith.Models.JobLead() { JobLeadId = 0 };
+           
+            JobLead = new JobLead()
+            {
+                JobLeadId = 0 
+                ,Password = Utils.GeneratePassword(16)  
+            }; 
             if (id != null && id > 0)
             {
                 JobLead = _jobLeadService.GetAll()

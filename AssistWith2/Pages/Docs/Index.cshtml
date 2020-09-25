@@ -1,0 +1,20 @@
+﻿@page "{jobleadid:int}/{TemplateName}"
+@model AssistWith.Pages.Docs.IndexModel
+<environment include="Development">
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/print.css" />
+</environment>
+<environment exclude="Development">
+    <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/print.min.css" asp-append-version="true" />
+</environment>
+@{
+    Layout = null;
+}
+@{
+    ViewData["Title"] = @Model.Template.Title;
+}
+
+@Html.Raw(@Model.Template.Content)
+
+

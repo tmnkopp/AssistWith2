@@ -5,50 +5,55 @@
     ViewData["Title"] = "Edit";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 } 
-<h2>Edit Profile</h4>
-<hr /> 
+ 
 <form method="post">
-    <div class="form-group">
-        <input type="submit" value="Save" class="btn btn-default" />
-    </div>
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <input type="hidden" asp-for="Profile.ProfileId" />
-    <div class="row">
-        <div class="col-sm-2 form-group">
-            <label asp-for="Profile.PROCODE" class="control-label"></label>
-            <input asp-for="Profile.PROCODE" class="form-control" />
-            <span asp-validation-for="Profile.PROCODE" class="text-danger"></span>
+        <div class="row">
+            <div class="col-sm-2 form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+                
+            </div>
+            <div class="col-sm-6 form-group">
+                <h2>Profile Edit </h2>
+            </div>
         </div> 
-        <div class="col-sm-8 form-group">
-            <label asp-for="Profile.ProfileUrl" class="control-label"></label>
-            <input asp-for="Profile.ProfileUrl" class="form-control" />
-            <span asp-validation-for="Profile.ProfileUrl" class="text-danger"></span>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Profile.ProfileId" />
+        <div class="row">
+            <div class="col-sm-2 form-group">
+                <label asp-for="Profile.PROCODE" class="control-label"></label>
+                <input asp-for="Profile.PROCODE" class="form-control" />
+                <span asp-validation-for="Profile.PROCODE" class="text-danger"></span>
+            </div>
+            <div class="col-sm-8 form-group">
+                <label asp-for="Profile.ProfileUrl" class="control-label"></label>
+                <input asp-for="Profile.ProfileUrl" class="form-control" />
+                <span asp-validation-for="Profile.ProfileUrl" class="text-danger"></span>
+            </div>
+            <div class="col-sm-2 form-group">
+                <label asp-for="Profile.SortOrder" class="control-label"></label>
+                <input asp-for="Profile.SortOrder" class="form-control" />
+                <span asp-validation-for="Profile.SortOrder" class="text-danger"></span>
+            </div>
         </div>
-        <div class="col-sm-2 form-group">
-            <label asp-for="Profile.SortOrder" class="control-label"></label>
-            <input asp-for="Profile.SortOrder" class="form-control" />
-            <span asp-validation-for="Profile.SortOrder" class="text-danger"></span>
+        <div class="row">
+            <div class="col-sm-6 form-group">
+                <label asp-for="Profile.Username" class="control-label"></label>
+                <input asp-for="Profile.Username" class="form-control" />
+                <span asp-validation-for="Profile.Username" class="text-danger"></span>
+            </div>
+            <div class="col-sm-6 form-group">
+                <label asp-for="Profile.Password" class="control-label"></label>
+                <input asp-for="Profile.Password" class="form-control" />
+                <span asp-validation-for="Profile.Password" class="text-danger"></span>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-6 form-group">
-            <label asp-for="Profile.Username" class="control-label"></label>
-            <input asp-for="Profile.Username" class="form-control" />
-            <span asp-validation-for="Profile.Username" class="text-danger"></span>
-        </div> 
-        <div class="col-sm-6 form-group">
-            <label asp-for="Profile.Password" class="control-label"></label>
-            <input asp-for="Profile.Password" class="form-control" />
-            <span asp-validation-for="Profile.Password" class="text-danger"></span>
+        <div class="row">
+            <div class="col-sm-12 form-group">
+                <label asp-for="Profile.Notes" class="control-label"></label>
+                <textarea asp-for="Profile.Notes" class="form-control"></textarea>
+                <span asp-validation-for="Profile.Notes" class="text-danger"></span>
+            </div>
         </div>
-    </div> 
-    <div class="row">
-        <div class="col-sm-12 form-group">
-            <label asp-for="Profile.Notes" class="control-label"></label>
-            <textarea asp-for="Profile.Notes" class="form-control" ></textarea>
-            <span asp-validation-for="Profile.Notes" class="text-danger"></span>
-        </div>
-    </div>
 
 </form> 
 @section Scripts {
