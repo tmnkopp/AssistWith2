@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+ 
 using AssistWith.Services;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc; 
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace AssistWith.Pages.JobLeads
@@ -20,6 +21,6 @@ namespace AssistWith.Pages.JobLeads
         public void OnGet()
         {
             JobLeads = _jobLeadService.GetAll().ToList();
-        }
+        } 
     }
 }

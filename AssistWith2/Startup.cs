@@ -14,7 +14,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using AssistWith.Models;
 using AssistWith.Common;
-using AssistWith.Services; 
+using AssistWith.Services;
+using System.IO;
+using Microsoft.AspNetCore.DataProtection;
+
 namespace AssistWith
 {
     public class Startup
@@ -77,7 +80,9 @@ namespace AssistWith
                 { 
                     options.PageViewLocationFormats.Add("/Pages/Shared/{0}.cshtml");
                 });
-
+            services.AddDataProtection()
+                .SetApplicationName("aw2")
+                .PersistKeysToFileSystem(new DirectoryInfo(@"/var/dpkeys/"));
         }
  
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -86,10 +91,10 @@ namespace AssistWith
             IHostingEnvironment env,
             UserManager<IdentityUser> userManager,
             RoleManager<IdentityRole> roleManager,
-            ApplicationDbContext context)
+            ApplicationDbContext context,
+            IConfiguration configuration)
         {
-
-
+ 
             if (env.IsDevelopment())
             {
                 app.UseDatabaseErrorPage();
@@ -108,7 +113,7 @@ namespace AssistWith
             app.UseAuthentication();
             context.Database.Migrate();
             DbInitializer.Initialize(context);
-            DbInitializer.SeedData(userManager, roleManager);
+            DbInitializer.SeedData(userManager, roleManager, configuration);
             app.UseMvc();
         }
     }

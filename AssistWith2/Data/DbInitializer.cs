@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,8 @@ namespace AssistWith.Data
         }
         public static async void SeedData(
             UserManager<IdentityUser> userManager,
-            RoleManager<IdentityRole> roleManager)
+            RoleManager<IdentityRole> roleManager,
+            IConfiguration configuration)
         {
 
             if (!roleManager.RoleExistsAsync("User").Result)
@@ -31,12 +33,14 @@ namespace AssistWith.Data
                 role.Name = "Admin";
                 IdentityResult roleResult = roleManager.CreateAsync(role).Result;
             }
-            if (userManager.FindByNameAsync("timkopp@gmail.com").Result == null)
-            {
+            var defaultuser = configuration.GetSection("AppSettings")["defaultuser"];
+            if (userManager.FindByNameAsync(defaultuser).Result == null)
+            { 
+                var pass = configuration.GetSection("AppSettings")["pass"];
                 IdentityUser user = new IdentityUser();
-                user.UserName = "timkopp@gmail.com";
-                user.Email = "timkopp@gmail.com";
-                IdentityResult result = userManager.CreateAsync(user, "P@ssword1").Result;
+                user.UserName = defaultuser;
+                user.Email = defaultuser;
+                IdentityResult result = userManager.CreateAsync(user, pass).Result;
                 if (result.Succeeded)
                 {
                     userManager.AddToRoleAsync(user, "Admin").Wait();
