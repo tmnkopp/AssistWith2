@@ -102,7 +102,9 @@ namespace AssistWith
             }
             else
             {
-                app.UseExceptionHandler("/Error");
+                app.UseDeveloperExceptionPage();
+                app.UseDatabaseErrorPage();
+                //app.UseExceptionHandler("/Error");
                 app.UseHsts();
             }
 
