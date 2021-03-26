@@ -9,11 +9,12 @@
 <table>
     @foreach (var item in Model.Profiles)
     {
-        <tr>
-            <td><a asp-page="/Profiles/Edit" asp-route-id="@item.ProfileId">Edit</a></td>
-            <td>@item.PROCODE</td>
-            <td>@item.Username</td>
-            <td>@item.Password</td>
-        </tr> 
+    <tr>
+        <td><a asp-page="/Profiles/Edit" asp-route-id="@item.ProfileId">Edit</a></td>
+        <td><a href="@item.ProfileUrlNormalized" target="_blank">Open</a></td>
+        <td>@item.PROCODE</td>
+        <td>@item.Username</td>
+        <td>@item.Password</td>
+    </tr> 
     }
 </table>
