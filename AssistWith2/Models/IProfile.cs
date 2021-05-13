@@ -8,6 +8,7 @@
         string PROCODE { get; set; }
         int ProfileId { get; set; }
         string ProfileUrl { get; set; }
+        string ProfileUrlNormalized { get;  }
         string Username { get; set; }
     }
 }
