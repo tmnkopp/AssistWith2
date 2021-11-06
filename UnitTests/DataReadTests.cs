@@ -41,8 +41,9 @@ namespace UnitTests
             d.OnEvent += (o, e) => { string item = ""; };
             d.Foo();
 
+            string[] cols = new string[] { "NAME", "AGE" };  
             Dictionary<int, DataRow> dups = new Dictionary<int, DataRow>();
-            string[] cols = new string[] { "NAME", "AGE" };   //
+            
             for (int i = 0; i < data.Rows.Count; i++)
             {
                 var select = string.Join(" AND ", (from col in cols select $" {col} = '{data.Rows[i][col]}' ")); 
