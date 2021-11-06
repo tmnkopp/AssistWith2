@@ -7,25 +7,51 @@ using System.Data;
 using System.Linq;
 
 namespace UnitTests
-{
-
+{ 
+    class BaseMock
+    {
+        virtual public void Foo()
+        {
+            Console.WriteLine("BaseMock");
+        }
+        public event EventHandler<EventArgs> OnEvent;
+        protected virtual void Event(EventArgs e)
+        {
+            string foo = "";
+            OnEvent?.Invoke(this, e);
+        }
+    }
+    class DeriveMock : BaseMock
+    {
+        public override void Foo()
+        {
+            Console.WriteLine("DeriveMock");
+            Event(new EventArgs());
+        }
+    }
     [TestClass]
     public class DataReadTests
     { 
         [TestMethod]
-        public void DataTAbleSelect_Selects()
-        { 
-            Dictionary<int, DataRow> dupRows = new Dictionary<int, DataRow>();
-            string[] cols = new string[] { };   //"NAME", "ADDR", "AGE" 
-            for (int iRow = 0; iRow < data.Rows.Count; iRow++)
+        public void DataTableSelect_Selects()
+        {
+            var d = new DeriveMock();
+            EventArgs e = new EventArgs();
+            d.OnEvent += (o, e) => { string item = ""; };
+            d.OnEvent += (o, e) => { string item = ""; };
+            d.Foo();
+
+            Dictionary<int, DataRow> dups = new Dictionary<int, DataRow>();
+            string[] cols = new string[] { "NAME", "AGE" };   //
+            for (int i = 0; i < data.Rows.Count; i++)
             {
-                var select = string.Join(" AND ", (from col in cols select $" {col} = '{data.Rows[0][col]}' ")); 
+                var select = string.Join(" AND ", (from col in cols select $" {col} = '{data.Rows[i][col]}' ")); 
                 if(!string.IsNullOrEmpty(select))
                     if (data.Select(select).Length > 1) 
-                        dupRows.Add(iRow, data.Rows[iRow]);  
+                        dups.Add(i+1, data.Rows[i]);  
             } 
-            Assert.IsNotNull(dupRows);
-        }
+            Assert.IsNotNull(dups);
+        } 
 
         private DataTable data {
 
@@ -40,11 +66,7 @@ namespace UnitTests
                 dt.Rows.Add("203456878", "Elan", "14 Main Street, Newyork, NY", 35);
                 dt.Rows.Add("203456878", "Elan", "14 Main Street, Newyork, NY", 35);
                 dt.Rows.Add("203456879", "Smith", "12 Main Street, Newyork, NY", 45);
-                dt.Rows.Add("203456880", "SAM", "345 Main Ave, Dayton, OH", 55);
-                dt.Rows.Add("203456881", "Sue", "32 Cranbrook Rd, Newyork, NY", 65);
-                dt.Rows.Add("203456882", "Winston", "1208 Alex St, Newyork, NY", 65);
-                dt.Rows.Add("203456883", "Mac", "126 Province Ave, Baltimore, NY", 85);
-                dt.Rows.Add("203456884", "SAM", "126 Province Ave, Baltimore, NY", 95);
+                dt.Rows.Add("203456880", "SAM", "345 Main Ave, Dayton, OH", 55); 
                 return dt; 
             }
         }
